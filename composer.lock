@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ad874bdf2dc08c4892f8a96cdea87203",
+    "content-hash": "5cc2b715478808977a4d867f5e79f288",
     "packages": [
         {
             "name": "brick/math",
@@ -1341,6 +1341,69 @@
             "time": "2026-06-26T00:11:25+00:00"
         },
         {
+            "name": "laravel/sanctum",
+            "version": "v4.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/sanctum.git",
+                "reference": "2a9bccc18e9907808e0018dd15fa643937886b1e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/sanctum/zipball/2a9bccc18e9907808e0018dd15fa643937886b1e",
+                "reference": "2a9bccc18e9907808e0018dd15fa643937886b1e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "illuminate/console": "^11.0|^12.0|^13.0",
+                "illuminate/contracts": "^11.0|^12.0|^13.0",
+                "illuminate/database": "^11.0|^12.0|^13.0",
+                "illuminate/support": "^11.0|^12.0|^13.0",
+                "php": "^8.2",
+                "symfony/console": "^7.0|^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.6",
+                "orchestra/testbench": "^9.15|^10.8|^11.0",
+                "phpstan/phpstan": "^1.10"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Sanctum\\SanctumServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Sanctum\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "Laravel Sanctum provides a featherweight authentication system for SPAs and simple APIs.",
+            "keywords": [
+                "auth",
+                "laravel",
+                "sanctum"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel/sanctum/issues",
+                "source": "https://github.com/laravel/sanctum"
+            },
+            "time": "2026-04-30T11:46:25+00:00"
+        },
+        {
             "name": "laravel/serializable-closure",
             "version": "v2.0.13",
             "source": {
@@ -1469,6 +1532,79 @@
                 "source": "https://github.com/laravel/tinker/tree/v3.0.2"
             },
             "time": "2026-03-17T14:54:13+00:00"
+        },
+        {
+            "name": "lcobucci/jwt",
+            "version": "5.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lcobucci/jwt.git",
+                "reference": "bb3e9f21e4196e8afc41def81ef649c164bca25e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lcobucci/jwt/zipball/bb3e9f21e4196e8afc41def81ef649c164bca25e",
+                "reference": "bb3e9f21e4196e8afc41def81ef649c164bca25e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-openssl": "*",
+                "ext-sodium": "*",
+                "php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0",
+                "psr/clock": "^1.0"
+            },
+            "require-dev": {
+                "infection/infection": "^0.29",
+                "lcobucci/clock": "^3.2",
+                "lcobucci/coding-standard": "^11.0",
+                "phpbench/phpbench": "^1.2",
+                "phpstan/extension-installer": "^1.2",
+                "phpstan/phpstan": "^1.10.7",
+                "phpstan/phpstan-deprecation-rules": "^1.1.3",
+                "phpstan/phpstan-phpunit": "^1.3.10",
+                "phpstan/phpstan-strict-rules": "^1.5.0",
+                "phpunit/phpunit": "^11.1"
+            },
+            "suggest": {
+                "lcobucci/clock": ">= 3.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Lcobucci\\JWT\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Luís Cobucci",
+                    "email": "lcobucci@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A simple library to work with JSON Web Token and JSON Web Signature",
+            "keywords": [
+                "JWS",
+                "jwt"
+            ],
+            "support": {
+                "issues": "https://github.com/lcobucci/jwt/issues",
+                "source": "https://github.com/lcobucci/jwt/tree/5.6.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/lcobucci",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.patreon.com/lcobucci",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2025-10-17T11:30:53+00:00"
         },
         {
             "name": "league/commonmark",
@@ -2133,6 +2269,73 @@
             "time": "2026-01-02T08:56:05+00:00"
         },
         {
+            "name": "namshi/jose",
+            "version": "7.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/namshi/jose.git",
+                "reference": "89a24d7eb3040e285dd5925fcad992378b82bcff"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/namshi/jose/zipball/89a24d7eb3040e285dd5925fcad992378b82bcff",
+                "reference": "89a24d7eb3040e285dd5925fcad992378b82bcff",
+                "shasum": ""
+            },
+            "require": {
+                "ext-date": "*",
+                "ext-hash": "*",
+                "ext-json": "*",
+                "ext-pcre": "*",
+                "ext-spl": "*",
+                "php": ">=5.5",
+                "symfony/polyfill-php56": "^1.0"
+            },
+            "require-dev": {
+                "phpseclib/phpseclib": "^2.0",
+                "phpunit/phpunit": "^4.5|^5.0",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "suggest": {
+                "ext-openssl": "Allows to use OpenSSL as crypto engine.",
+                "phpseclib/phpseclib": "Allows to use Phpseclib as crypto engine, use version ^2.0."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Namshi\\JOSE\\": "src/Namshi/JOSE/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alessandro Nadalin",
+                    "email": "alessandro.nadalin@gmail.com"
+                },
+                {
+                    "name": "Alessandro Cinelli (cirpo)",
+                    "email": "alessandro.cinelli@gmail.com"
+                }
+            ],
+            "description": "JSON Object Signing and Encryption library for PHP.",
+            "keywords": [
+                "JSON Web Signature",
+                "JSON Web Token",
+                "JWS",
+                "json",
+                "jwt",
+                "token"
+            ],
+            "support": {
+                "issues": "https://github.com/namshi/jose/issues",
+                "source": "https://github.com/namshi/jose/tree/master"
+            },
+            "time": "2016-12-05T07:27:31+00:00"
+        },
+        {
             "name": "nesbot/carbon",
             "version": "3.13.0",
             "source": {
@@ -2539,6 +2742,99 @@
                 }
             ],
             "time": "2026-02-16T23:10:27+00:00"
+        },
+        {
+            "name": "php-open-source-saver/jwt-auth",
+            "version": "2.9.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHP-Open-Source-Saver/jwt-auth.git",
+                "reference": "ce08363a9986e5253efd3663ed4f75c976bec89a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHP-Open-Source-Saver/jwt-auth/zipball/ce08363a9986e5253efd3663ed4f75c976bec89a",
+                "reference": "ce08363a9986e5253efd3663ed4f75c976bec89a",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "illuminate/auth": "^12|^13",
+                "illuminate/contracts": "^12|^13",
+                "illuminate/http": "^12|^13",
+                "illuminate/support": "^12|^13",
+                "lcobucci/jwt": "^5.4",
+                "namshi/jose": "^7.0",
+                "nesbot/carbon": "^2.0|^3.0",
+                "php": "^8.3"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3",
+                "illuminate/console": "^12|^13",
+                "illuminate/routing": "^12|^13",
+                "mockery/mockery": "^1.6",
+                "orchestra/testbench": "^10|^11",
+                "phpstan/phpstan": "^2",
+                "phpunit/phpunit": "^10.5|^11"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "JWTAuth": "PHPOpenSourceSaver\\JWTAuth\\Facades\\JWTAuth",
+                        "JWTFactory": "PHPOpenSourceSaver\\JWTAuth\\Facades\\JWTFactory"
+                    },
+                    "providers": [
+                        "PHPOpenSourceSaver\\JWTAuth\\Providers\\LaravelServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PHPOpenSourceSaver\\JWTAuth\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sean Tymon",
+                    "email": "tymon148@gmail.com",
+                    "homepage": "https://tymon.xyz",
+                    "role": "Forked package creator | Developer"
+                },
+                {
+                    "name": "Eric Schricker",
+                    "email": "eric.schricker@adiutabyte.de",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Fabio William Conceição",
+                    "email": "messhias@gmail.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Max Snow",
+                    "email": "contact@maxsnow.me",
+                    "role": "Developer"
+                }
+            ],
+            "description": "JSON Web Token Authentication for Laravel and Lumen",
+            "homepage": "https://github.com/PHP-Open-Source-Saver/jwt-auth",
+            "keywords": [
+                "Authentication",
+                "JSON Web Token",
+                "auth",
+                "jwt",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/PHP-Open-Source-Saver/jwt-auth/issues",
+                "source": "https://github.com/PHP-Open-Source-Saver/jwt-auth"
+            },
+            "time": "2026-05-07T16:44:01+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -4715,6 +5011,74 @@
             "time": "2026-05-27T06:59:30+00:00"
         },
         {
+            "name": "symfony/polyfill-php56",
+            "version": "v1.20.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-php56.git",
+                "reference": "54b8cd7e6c1643d78d011f3be89f3ef1f9f4c675"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-php56/zipball/54b8cd7e6c1643d78d011f3be89f3ef1f9f4c675",
+                "reference": "54b8cd7e6c1643d78d011f3be89f3ef1f9f4c675",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "type": "metapackage",
+            "extra": {
+                "thanks": {
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
+                },
+                "branch-alias": {
+                    "dev-main": "1.20-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill backporting some PHP 5.6+ features to lower PHP versions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-php56/tree/v1.20.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-10-23T14:02:19+00:00"
+        },
+        {
             "name": "symfony/polyfill-php80",
             "version": "v1.37.0",
             "source": {
@@ -6528,6 +6892,47 @@
             "time": "2025-04-30T06:54:44+00:00"
         },
         {
+            "name": "iamcal/sql-parser",
+            "version": "v0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/iamcal/SQLParser.git",
+                "reference": "610392f38de49a44dab08dc1659960a29874c4b8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/iamcal/SQLParser/zipball/610392f38de49a44dab08dc1659960a29874c4b8",
+                "reference": "610392f38de49a44dab08dc1659960a29874c4b8",
+                "shasum": ""
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "^1.0",
+                "phpunit/phpunit": "^5|^6|^7|^8|^9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "iamcal\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cal Henderson",
+                    "email": "cal@iamcal.com"
+                }
+            ],
+            "description": "MySQL schema parser",
+            "support": {
+                "issues": "https://github.com/iamcal/SQLParser/issues",
+                "source": "https://github.com/iamcal/SQLParser/tree/v0.7"
+            },
+            "time": "2026-01-28T22:20:33+00:00"
+        },
+        {
             "name": "jean85/pretty-package-versions",
             "version": "2.1.1",
             "source": {
@@ -6586,6 +6991,96 @@
                 "source": "https://github.com/Jean85/pretty-package-versions/tree/2.1.1"
             },
             "time": "2025-03-19T14:43:43+00:00"
+        },
+        {
+            "name": "larastan/larastan",
+            "version": "v3.10.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/larastan/larastan.git",
+                "reference": "2970f83398154178a739609c244577267c7ee8eb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/larastan/larastan/zipball/2970f83398154178a739609c244577267c7ee8eb",
+                "reference": "2970f83398154178a739609c244577267c7ee8eb",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "iamcal/sql-parser": "^0.7.0",
+                "illuminate/console": "^11.44.2 || ^12.4.1 || ^13",
+                "illuminate/container": "^11.44.2 || ^12.4.1 || ^13",
+                "illuminate/contracts": "^11.44.2 || ^12.4.1 || ^13",
+                "illuminate/database": "^11.44.2 || ^12.4.1 || ^13",
+                "illuminate/http": "^11.44.2 || ^12.4.1 || ^13",
+                "illuminate/pipeline": "^11.44.2 || ^12.4.1 || ^13",
+                "illuminate/support": "^11.44.2 || ^12.4.1 || ^13",
+                "php": "^8.2",
+                "phpstan/phpstan": "^2.2.0"
+            },
+            "require-dev": {
+                "doctrine/coding-standard": "^14",
+                "laravel/framework": "^11.44.2 || ^12.7.2 || ^13",
+                "mockery/mockery": "^1.6.12",
+                "nikic/php-parser": "^5.4",
+                "orchestra/canvas": "^v9.2.2 || ^10.0.1 || ^11",
+                "orchestra/testbench-core": "^9.12.0 || ^10.1 || ^11",
+                "phpstan/phpstan-deprecation-rules": "^2.0.1",
+                "phpunit/phpunit": "^10.5.35 || ^11.5.15 || ^12.5.8 || ^13.1.8"
+            },
+            "suggest": {
+                "orchestra/testbench": "Using Larastan for analysing a package needs Testbench",
+                "phpmyadmin/sql-parser": "Install to enable Larastan's optional phpMyAdmin-based SQL parser automatically"
+            },
+            "type": "phpstan-extension",
+            "extra": {
+                "phpstan": {
+                    "includes": [
+                        "extension.neon"
+                    ]
+                },
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Larastan\\Larastan\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Can Vural",
+                    "email": "can9119@gmail.com"
+                }
+            ],
+            "description": "Larastan - Discover bugs in your code without running it. A phpstan/phpstan extension for Laravel",
+            "keywords": [
+                "PHPStan",
+                "code analyse",
+                "code analysis",
+                "larastan",
+                "laravel",
+                "package",
+                "php",
+                "static analysis"
+            ],
+            "support": {
+                "issues": "https://github.com/larastan/larastan/issues",
+                "source": "https://github.com/larastan/larastan/tree/v3.10.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/canvural",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-05-28T08:00:58+00:00"
         },
         {
             "name": "laravel/agent-detector",
@@ -7926,6 +8421,70 @@
                 "source": "https://github.com/phpstan/phpdoc-parser/tree/2.3.2"
             },
             "time": "2026-01-25T14:56:51+00:00"
+        },
+        {
+            "name": "phpstan/phpstan",
+            "version": "2.2.2",
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e5cc34d491a90e79c216d824f60fe21fd4d93bd6",
+                "reference": "e5cc34d491a90e79c216d824f60fe21fd4d93bd6",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4|^8.0"
+            },
+            "conflict": {
+                "phpstan/phpstan-shim": "*"
+            },
+            "bin": [
+                "phpstan",
+                "phpstan.phar"
+            ],
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ondřej Mirtes"
+                },
+                {
+                    "name": "Markus Staab"
+                },
+                {
+                    "name": "Vincent Langlet"
+                }
+            ],
+            "description": "PHPStan - PHP Static Analysis Tool",
+            "keywords": [
+                "dev",
+                "static analysis"
+            ],
+            "support": {
+                "docs": "https://phpstan.org/user-guide/getting-started",
+                "forum": "https://github.com/phpstan/phpstan/discussions",
+                "issues": "https://github.com/phpstan/phpstan/issues",
+                "security": "https://github.com/phpstan/phpstan/security/policy",
+                "source": "https://github.com/phpstan/phpstan-src"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/ondrejmirtes",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/phpstan",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-06-05T09:00:01+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
