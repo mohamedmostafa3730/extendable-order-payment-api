@@ -6,7 +6,6 @@ enum PaymentMethod: string
 {
     case Cash = 'cash';
     case CreditCard = 'credit_card';
-    case DebitCard = 'debit_card';
     case BankTransfer = 'bank_transfer';
     case Wallet = 'wallet';
     case PayPal = 'paypal';
