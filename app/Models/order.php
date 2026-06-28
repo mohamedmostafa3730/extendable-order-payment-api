@@ -4,7 +4,8 @@ namespace App\Models;
 
 use App\Enums\OrderStatus;
 use App\Models\OrderItem;
-use App\Models\Payments;
+use App\Models\Payment;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -12,9 +13,13 @@ use Override;
 
 class Order extends Model
 {
+    use HasUuids;
+    public $incrementing = false;
+
+    protected $keyType = 'string';
     protected $fillable = [
         'user_id',
-        'status',
+        'order_status',
         'total',
     ];
 
@@ -22,7 +27,7 @@ class Order extends Model
     protected function casts(): array
     {
         return [
-            'status' => OrderStatus::class,
+            'order_status' => OrderStatus::class,
             'total' => 'decimal:2',
         ];
     }
@@ -39,6 +44,6 @@ class Order extends Model
 
     public function payments(): HasMany
     {
-        return $this->hasMany(Payments::class);
+        return $this->hasMany(Payment::class);
     }
 }

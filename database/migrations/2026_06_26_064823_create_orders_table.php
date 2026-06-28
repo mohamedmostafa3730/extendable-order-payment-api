@@ -12,10 +12,11 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->uuid('id')
+                ->primary();
 
             $table
-                ->foreignId('user_id')
+                ->foreignUuid('user_id')
                 ->constrained()
                 ->cascadeOnDelete();
             $table
