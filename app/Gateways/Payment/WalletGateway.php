@@ -19,7 +19,7 @@ class WalletGateway implements PaymentGatewayInterface
             success: true,
             status: PaymentStatus::Paid,
             reference: (string) Str::uuid(),
-            message: 'PayPal payment processed successfully.'
+            message: 'Wallet payment processed successfully.'
         );
     }
 

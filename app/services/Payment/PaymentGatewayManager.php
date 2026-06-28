@@ -10,30 +10,32 @@ use App\Gateways\Payment\CashGateway;
 use App\Gateways\Payment\CreditCardGateway;
 use App\Gateways\Payment\PayPalGateway;
 use App\Gateways\Payment\WalletGateway;
-use InvalidArgumentException;
-
 class PaymentGatewayManager
 {
-    /**
-     * Resolve the appropriate payment gateway.
-     */
+    public function __construct(
+        private CreditCardGateway $creditCard,
+        private PayPalGateway $paypal,
+        private WalletGateway $wallet,
+        private CashGateway $cash,
+        private BankTransferGateway $bankTransfer,
+    ) {
+    }
+
+
     public function resolve(PaymentMethod $paymentMethod): PaymentGatewayInterface
     {
         return match ($paymentMethod) {
 
-            PaymentMethod::CreditCard => new CreditCardGateway(),
+            PaymentMethod::CreditCard => $this->creditCard,
 
-            PaymentMethod::PayPal => new PayPalGateway(),
+            PaymentMethod::PayPal => $this->paypal,
 
-            PaymentMethod::Wallet => new WalletGateway(),
+            PaymentMethod::Wallet => $this->wallet,
 
-            PaymentMethod::Cash => new CashGateway(),
+            PaymentMethod::Cash => $this->cash,
 
-            PaymentMethod::BankTransfer => new BankTransferGateway(),
+            PaymentMethod::BankTransfer => $this->bankTransfer,
 
-            default => throw new InvalidArgumentException(
-                "Unsupported payment method [{$paymentMethod->value}]."
-            ),
         };
     }
 }

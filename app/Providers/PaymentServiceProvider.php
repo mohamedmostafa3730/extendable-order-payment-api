@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
-class PaymentServiceProvider
+use Carbon\Laravel\ServiceProvider;
+
+class PaymentServiceProvider extends ServiceProvider
 {
 
     public function register(): void
