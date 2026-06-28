@@ -1,0 +1,338 @@
+{
+  "info": {
+    "_postman_id": "fd4dee74-58f5-4fd6-9983-474da3ff99a1",
+    "name": "extendable-order-payment-api",
+    "description": "StartFragment\n\n# Extendable Order & Payment Management API\n\n## Overview\n\nThis API provides an extendable order and payment management system built with Laravel.\n\nThe system focuses on:\n\n- Clean code principles\n    \n- RESTful API design\n    \n- JWT authentication\n    \n- Payment gateway extensibility\n    \n- Validation and business rules enforcement\n    \n- Testable and maintainable architecture\n    \n\n---\n\n# Base URL\n\n```\nhttp://localhost:8000/api/v1\n\n ```\n\nAll protected endpoints require:\n\n```\nAuthorization: Bearer {JWT_TOKEN}\n\n ```\n\n---\n\n# API Modules\n\nThe API is organized into:\n\n```\nAuthentication\nOrders\nPayments\n\n ```\n\n---\n\n# Authentication\n\n## Register User\n\nCreate a new user account.\n\n### Endpoint\n\n```\nPOST /register\n\n ```\n\n### Request\n\n``` json\n{\n    \"name\": \"Mohamed Mostafa\",\n    \"email\": \"mohamed@example.com\",\n    \"password\": \"password123\",\n    \"password_confirmation\": \"password123\"\n}\n\n ```\n\n### Response\n\nStatus:\n\n```\n201 Created\n\n ```\n\n``` json\n{\n    \"message\": \"User registered successfully.\",\n    \"data\": {\n        \"id\": \"uuid\",\n        \"name\": \"Mohamed Mostafa\",\n        \"email\": \"mohamed@example.com\"\n    }\n}\n\n ```\n\n---\n\n# Login\n\nGenerate JWT token.\n\n### Endpoint\n\n```\nPOST /login\n\n ```\n\n### Request\n\n``` json\n{\n    \"email\": \"mohamed@example.com\",\n    \"password\": \"password123\"\n}\n\n ```\n\n### Response\n\n``` json\n{\n    \"message\": \"Login successful.\",\n    \"token\": \"jwt_token\"\n}\n\n ```\n\n---\n\n# Logout\n\nInvalidate current authentication token.\n\n### Endpoint\n\n```\nPOST /logout\n\n ```\n\nHeaders:\n\n```\nAuthorization: Bearer TOKEN\n\n ```\n\nResponse:\n\n``` json\n{\n    \"message\": \"Logged out successfully.\"\n}\n\n ```\n\n---\n\n# Orders API\n\nAll order endpoints require authentication.\n\n---\n\n# Create Order\n\nCreates an order and calculates the total automatically.\n\n### Endpoint\n\n```\nPOST /orders\n\n ```\n\n### Request\n\n``` json\n{\n    \"items\": [\n        {\n            \"product_name\": \"Laptop\",\n            \"quantity\": 2,\n            \"price\": 500\n        },\n        {\n            \"product_name\": \"Mouse\",\n            \"quantity\": 1,\n            \"price\": 50\n        }\n    ]\n}\n\n ```\n\n### Response\n\n``` json\n{\n    \"data\": {\n        \"id\": \"order_uuid\",\n        \"order_status\": \"pending\",\n        \"total\": \"1050.00\"\n    }\n}\n\n ```\n\n---\n\n# Get Orders\n\nSupports pagination.\n\n### Endpoint\n\n```\nGET /orders\n\n ```\n\nExample:\n\n```\nGET /orders?page=1\n\n ```\n\n---\n\n# Show Order\n\n### Endpoint\n\n```\nGET /orders/{order_id}\n\n ```\n\n---\n\n# Update Order\n\n### Endpoint\n\n```\nPUT /orders/{order_id}\n\n ```\n\nExample:\n\n``` json\n{\n    \"order_status\": \"confirmed\"\n}\n\n ```\n\nor:\n\n``` json\n{\n    \"items\": [\n        {\n            \"product_name\": \"Keyboard\",\n            \"quantity\": 1,\n            \"price\": 100\n        }\n    ]\n}\n\n ```\n\n---\n\n# Delete Order\n\n### Endpoint\n\n```\nDELETE /orders/{order_id}\n\n ```\n\nSuccess:\n\n```\n204 No Content\n\n ```\n\nBusiness Rule:\n\nOrders cannot be deleted if payments exist.\n\n---\n\n# Payments API\n\n---\n\n# Process Payment\n\nProcess payment using the selected gateway.\n\n### Endpoint\n\n```\nPOST /orders/{order_id}/payments\n\n ```\n\n### Request\n\n``` json\n{\n    \"order_id\": \"order_uuid\",\n    \"payment_method\": \"credit_card\",\n    \"amount\": 1050\n}\n\n ```\n\n---\n\n# Supported Payment Methods\n\n| Method | Result |\n| --- | --- |\n| credit_card | paid |\n| paypal | paid |\n| wallet | paid |\n| cash | paid |\n| bank_transfer | pending |\n\n---\n\n# Payment Success Response\n\n``` json\n{\n    \"data\": {\n        \"id\": \"payment_uuid\",\n        \"order_id\": \"order_uuid\",\n        \"payment_reference\": \"uuid\",\n        \"payment_method\": \"credit_card\",\n        \"payment_status\": \"paid\",\n        \"amount\": \"1050.00\"\n    }\n}\n\n ```\n\n---\n\n# Payment Business Rules\n\n## 1\\. Only Confirmed Orders Can Be Paid\n\nExample error:\n\n``` json\n{\n    \"message\": \"Only confirmed orders can be paid.\"\n}\n\n ```\n\n---\n\n## 2\\. Payment Amount Must Match Order Total\n\nExample error:\n\n``` json\n{\n    \"message\": \"Payment amount must equal the order total.\"\n}\n\n ```\n\n---\n\n## 3\\. Duplicate Successful Payments Are Not Allowed\n\nExample:\n\n``` json\n{\n    \"message\": \"This order has already been paid.\"\n}\n\n ```\n\n---\n\n# Payment Gateway Design\n\nThe payment system uses the Strategy Pattern.\n\nArchitecture:\n\n```\nPaymentGatewayInterface\n          |\n          |\n---------------------------------\n|        |        |        |     |\nCash   PayPal   Wallet  Card  Bank\n\n ```\n\nEach gateway implements:\n\n``` php\npublic function pay(\n    PaymentDataDTO $payment\n): PaymentResultDTO;\n\n ```\n\n---\n\n# Adding a New Payment Gateway\n\nExample:\n\nCreate:\n\n```\nApplePayGateway.php\n\n ```\n\nImplement:\n\n``` php\nclass ApplePayGateway implements PaymentGatewayInterface\n{\n    public function pay(\n        PaymentDataDTO $payment\n    ): PaymentResultDTO\n    {\n        return new PaymentResultDTO(\n            true,\n            PaymentStatus::Paid,\n            uuid(),\n            \"Apple Pay processed successfully\"\n        );\n    }\n}\n\n ```\n\nRegister it in:\n\n```\nPaymentGatewayManager\n\n ```\n\nOnly the manager changes.\n\nNo changes required in:\n\n- PaymentService\n    \n- PaymentController\n    \n- Existing gateways\n    \n\n---\n\n# Validation\n\n## Order Validation\n\nRequired:\n\n``` json\n{\n    \"items\":[]\n}\n\n ```\n\nItem fields:\n\n```\nproduct_name\nquantity\nprice\n\n ```\n\n---\n\n## Payment Validation\n\nRequired:\n\n``` json\n{\n    \"order_id\":\"uuid\",\n    \"payment_method\":\"credit_card\",\n    \"amount\":100\n}\n\n ```\n\n---\n\n# HTTP Status Codes\n\n| Code | Description |\n| --- | --- |\n| 200 | Successful request |\n| 201 | Resource created |\n| 204 | Deleted successfully |\n| 401 | Unauthorized |\n| 403 | Forbidden |\n| 422 | Validation error |\n\n---\n\n# Postman Collection Structure\n\n```\nExtendable Order Payment API\n├── Authentication\n│\n├── Orders\n│   ├── Create Order\n│   ├── Get Orders\n│   ├── Show Order\n│   ├── Update Order\n│   └── Delete Order\n│\n└── Payments\n    ├── Credit Card\n    ├── PayPal\n    ├── Wallet\n    ├── Cash\n    └── Bank Transfer\n\n ```\n\n---\n\n# Notes\n\n- API follows RESTful principles.\n    \n- Payment gateways are designed for easy extension.\n    \n- All inputs are validated.\n    \n- Protected resources require JWT authentication.\n    \n- Payment processing is simulated.\n    \n\nEndFragment",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "43191609",
+    "_collection_link": "https://go.postman.co/collection/43191609-fd4dee74-58f5-4fd6-9983-474da3ff99a1?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Mohamed\",\r\n    \"email\": \"mohamed@test.com\",\r\n    \"password\": \"password123\",\r\n    \"password_confirmation\": \"password123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9090/api/v1/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "api",
+                "v1",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"mohamed@test.com\",\r\n    \"password\": \"password123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9090/api/v1/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "api",
+                "v1",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9090/api/v1/logout",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "api",
+                "v1",
+                "logout"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Order",
+      "item": [
+        {
+          "name": "Create Order",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"items\": [\r\n        {\r\n            \"product_name\": \"Laptop\",\r\n            \"quantity\": 2,\r\n            \"price\": 500\r\n        },\r\n        {\r\n            \"product_name\": \"Mouse\",\r\n            \"quantity\": 1,\r\n            \"price\": 50\r\n        }\r\n    ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9090/api/v1/orders",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "api",
+                "v1",
+                "orders"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Confirm Order",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"order_status\": \"confirmed\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9090/api/v1/orders/019f0f0d-ba31-733c-9baa-eff0cbcbc788",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "api",
+                "v1",
+                "orders",
+                "019f0f0d-ba31-733c-9baa-eff0cbcbc788"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Orders",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9090/api/v1/orders/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "api",
+                "v1",
+                "orders",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Show Order",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9090/api/v1/orders/019f0f11-71ae-7385-8ef3-8e7cebf87c4b",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "api",
+                "v1",
+                "orders",
+                "019f0f11-71ae-7385-8ef3-8e7cebf87c4b"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Order",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"order_status\": \"cancelled\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9090/api/v1/orders/019f0f11-71ae-7385-8ef3-8e7cebf87c4b",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "api",
+                "v1",
+                "orders",
+                "019f0f11-71ae-7385-8ef3-8e7cebf87c4b"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Order",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9090/api/v1/orders/019f0f11-71ae-7385-8ef3-8e7cebf87c4b",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "api",
+                "v1",
+                "orders",
+                "019f0f11-71ae-7385-8ef3-8e7cebf87c4b"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Payment",
+      "item": [
+        {
+          "name": "Process Payment",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"order_id\": \"019f0f03-373c-726a-85ae-f70744f3bc43\",\r\n    \"payment_method\": \"credit_card\",\r\n    \"amount\": 1050\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9090/api/v1/orders/019f0f0d-ba31-733c-9baa-eff0cbcbc788/payments",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9090",
+              "path": [
+                "api",
+                "v1",
+                "orders",
+                "019f0f0d-ba31-733c-9baa-eff0cbcbc788",
+                "payments"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{json_web_token_0sg4}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "json_web_token_0sg4",
+      "secret": true
+    }
+  ]
+}
