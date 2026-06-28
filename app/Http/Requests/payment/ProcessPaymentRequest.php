@@ -2,8 +2,9 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Enums\PaymentMethod;
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Validation\Rule;
 class ProcessPaymentRequest extends FormRequest
 {
     public function authorize(): bool
@@ -14,21 +15,21 @@ class ProcessPaymentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-
-            'email' => [
+            'order_id' => [
                 'required',
-                'string',
-                'email',
-                'max:255',
-                'unique:users,email',
+                'uuid',
+                'exists:orders,id',
             ],
 
-            'password' => [
+            'payment_method' => [
                 'required',
-                'string',
-                'confirmed',
-                'min:8',
+                Rule::in(PaymentMethod::values()),
+            ],
+
+            'amount' => [
+                'required',
+                'numeric',
+                'min:0.01',
             ],
         ];
     }
@@ -36,32 +37,23 @@ class ProcessPaymentRequest extends FormRequest
     public function messages(): array
     {
         return [
-            // Name
-            'name.required' => 'Please enter your full name.',
-            'name.string' => 'The full name must be a valid string.',
-            'name.max' => 'The full name may not exceed 255 characters.',
-
-            // Email
-            'email.required' => 'Please enter your email address.',
-            'email.string' => 'The email address must be a valid string.',
-            'email.email' => 'Please enter a valid email address.',
-            'email.max' => 'The email address may not exceed 255 characters.',
-            'email.unique' => 'This email address is already in use.',
-
-            // Password
-            'password.required' => 'Please enter a password.',
-            'password.string' => 'The password must be a valid string.',
-            'password.confirmed' => 'The password confirmation does not match.',
-            'password.min' => 'The password must be at least 8 characters long.',
+            'order_id.required' => 'Order ID is required.',
+            'order_id.uuid' => 'Order ID must be a valid UUID.',
+            'order_id.exists' => 'The selected order does not exist.',
+            'payment_method.required' => 'Please select a payment method.',
+            'payment_method.in' => 'The selected payment method is invalid.',
+            'amount.required' => 'Payment amount is required.',
+            'amount.numeric' => 'Payment amount must be a valid number.',
+            'amount.min' => 'Payment amount must be greater than zero.',
         ];
     }
 
     public function attributes(): array
     {
         return [
-            'name' => 'full name',
-            'email' => 'email address',
-            'password' => 'password',
+            'order_id' => 'order',
+            'payment_method' => 'payment method',
+            'amount' => 'payment amount',
         ];
     }
 }
